@@ -2,7 +2,7 @@ name: Test
 on:
   workflow_run:
     workflows: ["Train"]
-    types: [completed]
+    types: [requested]
     branches: [ "main" ]
     paths-ignore:
       - 'data/**'
