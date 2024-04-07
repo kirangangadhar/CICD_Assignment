@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  Train:
     runs-on: ubuntu-latest
     steps:
     
