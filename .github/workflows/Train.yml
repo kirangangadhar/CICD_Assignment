@@ -1,0 +1,24 @@
+name: Train
+on:
+  pull_request:
+    branches: [ "main" ]
+    paths-ignore:
+      - 'data/**'
+      - 'requirements.txt'
+      - 'README.md'
+
+permissions:
+  contents: read
+
+jobs:
+  Train:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Build the Docker image
+      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/cicd_image -f ../../Dockerfile
+    
+    - name: Push the Docker image to registry
+      run: |
+        echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        docker push ${{ secrets.DOCKER_USERNAME }}/cicd_image
