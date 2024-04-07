@@ -1,9 +1,10 @@
 name: Test
 
-on :
+on:
   workflow_run:
-    workflows: ["Train.yml"]
-    types: [completed]
+    workflows: ["Train"] 
+    types: 
+      - completed
     
     paths-ignore:
       - 'data/**'
