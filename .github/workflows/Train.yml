@@ -25,6 +25,7 @@ jobs:
         echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
         docker push ${{ secrets.DOCKER_USERNAME }}/cicd_image
   
+
   Test:
     runs-on: ubuntu-latest
 
@@ -45,3 +46,4 @@ jobs:
         Accuracy=`cat accuracy.txt`
         echo "$Accuracy"
         if [[ `echo "$Accuracy 0.30" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
+

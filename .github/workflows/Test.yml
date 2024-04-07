@@ -1,35 +1,36 @@
-name: Test
+# name: Test
 
-on:
-  workflow_run:
-    workflows: ["Train"] 
-    types: 
-      - completed
+# on :
+#   pull_request:
+#     branches: [ "main" ]
+#     paths-ignore:
+#       - 'data/**'
+#       - 'requirements.txt'
+#       - 'README.md'
     
-    paths-ignore:
-      - 'data/**'
-      - 'requirements.txt'
-      - 'README.md'
 
-permissions:
-  contents: read
+# permissions:
+#   contents: read
 
-jobs:
-  Test:
-    runs-on: ubuntu-latest
+# jobs:
+#   Test:
+#     runs-on: ubuntu-latest
 
-    steps:
+#     needs: Train
+  
+#     steps:
 
-    - uses: actions/checkout@v3
+#     - uses: actions/checkout@v3
 
-    - name: Pull the Docker image from registry
-      run: docker pull ${{ secrets.DOCKER_USERNAME }}/cicd_image
+#     - name: Pull the Docker image from registry
+#       run: docker pull ${{ secrets.DOCKER_USERNAME }}/cicd_image
     
-    - name: Run the Docker container
-      run: docker run ${{ secrets.DOCKER_USERNAME }}/cicd_image > accuracy.txt
+#     - name: Run the Docker container
+#       run: docker run ${{ secrets.DOCKER_USERNAME }}/cicd_image > accuracy.txt
     
-    - name: Test Accuracy
-      run: |
-        Accuracy=`cat accuracy.txt`
-        echo "$Accuracy:"
-        if [[ `echo "$Accuracy 0.30" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
+#     - name: Test Accuracy
+#       run: |
+#         Accuracy=`cat accuracy.txt`
+#         echo "$Accuracy:"
+#         if [[ `echo "$Accuracy 0.35" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
+
