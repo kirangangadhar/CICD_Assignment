@@ -3,7 +3,7 @@ on:
   workflow_run:
     workflows: ["Train"]
     types: [requested]
-    branches: [ "main" ]
+    branches: ["main"]
     paths-ignore:
       - 'data/**'
       - 'requirements.txt'
