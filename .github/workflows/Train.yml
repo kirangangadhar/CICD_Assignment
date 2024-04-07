@@ -1,4 +1,4 @@
-name: Train
+name: TrainAndTest
 
 on :
   pull_request:
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
 
     needs: Train
-  
+
     steps:
 
     - uses: actions/checkout@v3
@@ -46,4 +46,4 @@ jobs:
         Accuracy=`cat accuracy.txt`
         echo "$Accuracy"
         if [[ `echo "$Accuracy 0.30" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
-        
+
