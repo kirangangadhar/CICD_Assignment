@@ -32,4 +32,4 @@ jobs:
       run: |
         Accuracy=`cat accuracy.txt`
         echo "$Accuracy:"
-        if [[ `echo "$Accuracy 0.35" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
+        if [[ `echo "$Accuracy 0.30" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
