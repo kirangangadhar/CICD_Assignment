@@ -1,6 +1,8 @@
 name: Test
 on:
-  pull_request:
+  workflow_run:
+    workflows: ['Train']
+    types: [completed]:
     branches: [ "kiran_branch" ]
     paths-ignore:
       - 'data/**'
@@ -11,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  Test:
     runs-on: ubuntu-latest
     needs: Train
     steps:
@@ -22,7 +24,7 @@ jobs:
       run: docker run ${{ secrets.DOCKER_USERNAME }}/cicd_image > accuracy.txt
     
     - name: Test Accuracy
-        run: |
-          Accuracy=`cat accuracy.txt`
-          echo "$Accuracy:"
-          if [[ `echo "$Accuracy 0.35" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
+      run: |
+        Accuracy=`cat accuracy.txt`
+        echo "$Accuracy:"
+        if [[ `echo "$Accuracy 0.35" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
